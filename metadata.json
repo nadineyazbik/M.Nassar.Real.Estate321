@@ -1,0 +1,6 @@
+{
+  "name": "M.Nassar Real Estate",
+  "description": "منصة عقارات م. نصار العقارية - شقق، فيلات، وأراضي للبيع والإيجار في بيروت وخارجها مع لوحة تحكم كاملة",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
