@@ -10,7 +10,7 @@ app.use(express.json());
 
 // Initialize Google GenAI on server-side with telemetry User-Agent header
 const ai = new GoogleGenAI({
-  apiKey: process.env.GEMINI_API_KEY || "",
+  apiKey: process.env.SERVICE_API_KEY || "",
   httpOptions: {
     headers: {
       "User-Agent": "aistudio-build",
