@@ -7,6 +7,7 @@ import { PopularCategories } from './components/PopularCategories';
 import { PropertyCard } from './components/PropertyCard';
 import { PropertyDetailModal } from './components/PropertyDetailModal';
 import { AdminDashboard } from './components/AdminDashboard';
+import { AdminLoginModal } from './components/AdminLoginModal';
 import { Footer } from './components/Footer';
 import { AiAdvisorModal } from './components/AiAdvisorModal';
 import { PropertyAlertModal } from './components/PropertyAlertModal';
@@ -26,6 +27,18 @@ export default function App() {
 
   // Admin Modal state
   const [isAdminOpen, setIsAdminOpen] = useState<boolean>(false);
+  const [isAdminLoginOpen, setIsAdminLoginOpen] = useState<boolean>(false);
+  const [isAdminAuthed, setIsAdminAuthed] = useState<boolean>(
+    sessionStorage.getItem('mnassar_admin_auth') === 'true'
+  );
+
+  const handleOpenAdmin = () => {
+    if (isAdminAuthed) {
+      setIsAdminOpen(true);
+    } else {
+      setIsAdminLoginOpen(true);
+    }
+  };
 
   // Selected Property for Modal
   const [selectedProperty, setSelectedProperty] = useState<Property | null>(null);
@@ -202,7 +215,7 @@ export default function App() {
       <Header
         activeTab={activeTab}
         setActiveTab={setActiveTab}
-        onOpenAdmin={() => setIsAdminOpen(true)}
+        onOpenAdmin={handleOpenAdmin}
         onOpenAiAdvisor={() => {
           setSelectedPropertyForValuation(null);
           setIsAiAdvisorOpen(true);
@@ -471,7 +484,18 @@ export default function App() {
         defaultTab={appDownloadTab}
       />
 
-      {/* 11. Admin Dashboard Modal */}
+      {/* 11. Admin Login Modal (password gate) */}
+      <AdminLoginModal
+        isOpen={isAdminLoginOpen}
+        onClose={() => setIsAdminLoginOpen(false)}
+        onSuccess={() => {
+          setIsAdminAuthed(true);
+          setIsAdminLoginOpen(false);
+          setIsAdminOpen(true);
+        }}
+      />
+
+      {/* 12. Admin Dashboard Modal */}
       <AdminDashboard
         isOpen={isAdminOpen}
         onClose={() => setIsAdminOpen(false)}
@@ -481,12 +505,12 @@ export default function App() {
         onRefreshData={loadData}
       />
 
-      {/* 12. Scroll To Top Smooth Button */}
+      {/* 13. Scroll To Top Smooth Button */}
       <ScrollToTop />
 
-      {/* 13. Footer */}
+      {/* 14. Footer */}
       <Footer
-        onOpenAdmin={() => setIsAdminOpen(true)}
+        onOpenAdmin={handleOpenAdmin}
         setActiveTab={setActiveTab}
         onOpenAppDownload={(tab) => {
           setAppDownloadTab(tab || 'unified');
