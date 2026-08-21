@@ -109,12 +109,12 @@ export const Header: React.FC<HeaderProps> = ({
 
         {/* Interactive Features Buttons (AI, Favorites, Alerts, App/QR) */}
         <div className="flex items-center gap-2">
-          {/* Professional Universal App Button */}
+          {/* Professional Universal App Button - Desktop only, mobile has it in drawer */}
           {onOpenAppDownload && (
             <button
               id="header-app-download-btn"
               onClick={() => onOpenAppDownload('unified')}
-              className="py-1.5 px-3 rounded-full bg-emerald-50 text-[#064E3B] hover:bg-[#064E3B] hover:text-white transition-all border border-emerald-300 relative shrink-0 flex items-center gap-1.5 group shadow-xs whitespace-nowrap"
+              className="hidden lg:flex py-1.5 px-3 rounded-full bg-emerald-50 text-[#064E3B] hover:bg-[#064E3B] hover:text-white transition-all border border-emerald-300 relative shrink-0 items-center gap-1.5 group shadow-xs whitespace-nowrap"
               title="تحميل تطبيق الهواتف الذكية (iPhone & Android)"
             >
               <Smartphone className="w-4 h-4 text-[#D4AF37] group-hover:scale-110 transition-transform shrink-0" />
